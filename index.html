@@ -1,20 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Burger Shop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .hero {
+            background: url("assets/burger1.jpg") center/cover no-repeat;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+        .burger-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
+
+   <div id="navBar"></div>
+   
+    <!-- HERO SECTION -->
+    <div class="hero text-center">
+        <h1 class="display-4 fw-bold">Welcome to the Best Burger Shop</h1>
+    </div>
+
+    <!-- BURGER CARDS -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4 fw-bold">Our Burgers</h2>
+
+        <div class="row g-4">
+
+            <!-- Card 1 -->
+            <div class="col-md-4">
+                <div class="card burger-card shadow-sm">
+                    <img src="assets/burger2.jpg" class="card-img-top" alt="Classic Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Classic Burger</h5>
+                        <p class="card-text">Juicy beef patty with fresh lettuce, tomato, cheese, and our signature sauce.</p>
+                         <p class="fw-bolder">Rs. 900</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-4">
+                <div class="card burger-card shadow-sm">
+                    <img src="assets/burger3.jpg" class="card-img-top" alt="Cheese Explosion">
+                    <div class="card-body">
+                        <h5 class="card-title">Cheese Explosion</h5>
+                        <p class="card-text">Double cheese, double flavor! A dream burger for cheese lovers.</p>
+                         <p class="fw-bolder">Rs. 1000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-4">
+                <div class="card burger-card shadow-sm">
+                    <img src="assets/burger4.jpg" class="card-img-top" alt="Spicy Hot Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Spicy Hot Burger</h5>
+                        <p class="card-text">Packed with jalapeños, spicy sauce, and crispy onions for heat lovers.</p>
+                        <p class="fw-bolder">Rs. 1300</p>
+                    </div>
+                </div>
+            </div>
+
+              <!-- Card 4 -->
+            <div class="col-md-4">
+                <div class="card burger-card shadow-sm">
+                    <img src="assets/burger5.jpg" class="card-img-top" alt="Spicy Hot Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Fish Hot Burger</h5>
+                        <p class="card-text">Juicy fish patty with fresh lettuce, tomato, cheese, and our signature sauce.</p>
+                        <p class="fw-bolder">Rs. 1200</p>
+                    </div>
+                </div>
+            </div>
+             
+             <!-- Card 5 -->
+             <div class="col-md-4">
+                <div class="card burger-card shadow-sm">
+                    <img src="assets/burger&fries.jpg" class="card-img-top" alt="Spicy Hot Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Burger and fries</h5>
+                        <p class="card-text">Fried fries and one chicken burger with cheese slide and Juicy patty slide</p>
+                        <p class="fw-bolder">Rs. 850</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 6 -->
+             <div class="col-md-4">
+                <div class="card burger-card shadow-sm">
+                    <img src="assets/burger&coce.jpg" class="card-img-top" alt="Spicy Hot Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Burger and coce</h5>
+                        <p class="card-text">Juicy cheese burger and one coce</p>
+                        <p class="fw-bolder">Rs. 900</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-light text-center py-3">
+        <p class="mb-0">© 2025 Burger Shop. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+   
     <script src="js/app.js"></script>
 </body>
-
 </html>
