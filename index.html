@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .hero {
             background: url("assets/burger1.jpg") center/cover no-repeat;
@@ -16,19 +17,21 @@
             align-items: center;
             justify-content: center;
             color: white;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
         }
+
         .burger-card img {
             height: 200px;
             object-fit: cover;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 
-   <div id="navBar"></div>
-   
+    <div id="navBar"></div>
+
     <!-- HERO SECTION -->
     <div class="hero text-center">
         <h1 class="display-4 fw-bold">Welcome to the Best Burger Shop</h1>
@@ -46,8 +49,9 @@
                     <img src="assets/burger2.jpg" class="card-img-top" alt="Classic Burger">
                     <div class="card-body">
                         <h5 class="card-title">Classic Burger</h5>
-                        <p class="card-text">Juicy beef patty with fresh lettuce, tomato, cheese, and our signature sauce.</p>
-                         <p class="fw-bolder">Rs. 900</p>
+                        <p class="card-text">Juicy beef patty with fresh lettuce, tomato, cheese, and our signature
+                            sauce.</p>
+                        <p class="fw-bolder">Rs. 900</p>
                     </div>
                 </div>
             </div>
@@ -59,7 +63,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Cheese Explosion</h5>
                         <p class="card-text">Double cheese, double flavor! A dream burger for cheese lovers.</p>
-                         <p class="fw-bolder">Rs. 1000</p>
+                        <p class="fw-bolder">Rs. 1000</p>
                     </div>
                 </div>
             </div>
@@ -76,32 +80,34 @@
                 </div>
             </div>
 
-              <!-- Card 4 -->
+            <!-- Card 4 -->
             <div class="col-md-4">
                 <div class="card burger-card shadow-sm">
                     <img src="assets/burger5.jpg" class="card-img-top" alt="Spicy Hot Burger">
                     <div class="card-body">
                         <h5 class="card-title">Fish Hot Burger</h5>
-                        <p class="card-text">Juicy fish patty with fresh lettuce, tomato, cheese, and our signature sauce.</p>
+                        <p class="card-text">Juicy fish patty with fresh lettuce, tomato, cheese, and our signature
+                            sauce.</p>
                         <p class="fw-bolder">Rs. 1200</p>
                     </div>
                 </div>
             </div>
-             
-             <!-- Card 5 -->
-             <div class="col-md-4">
+
+            <!-- Card 5 -->
+            <div class="col-md-4">
                 <div class="card burger-card shadow-sm">
                     <img src="assets/burger&fries.jpg" class="card-img-top" alt="Spicy Hot Burger">
                     <div class="card-body">
                         <h5 class="card-title">Burger and fries</h5>
-                        <p class="card-text">Fried fries and one chicken burger with cheese slide and Juicy patty slide</p>
+                        <p class="card-text">Fried fries and one chicken burger with cheese slide and Juicy patty slide
+                        </p>
                         <p class="fw-bolder">Rs. 850</p>
                     </div>
                 </div>
             </div>
 
-             <!-- Card 6 -->
-             <div class="col-md-4">
+            <!-- Card 6 -->
+            <div class="col-md-4">
                 <div class="card burger-card shadow-sm">
                     <img src="assets/burger&coce.jpg" class="card-img-top" alt="Spicy Hot Burger">
                     <div class="card-body">
@@ -115,13 +121,64 @@
         </div>
     </div>
 
+    <div class="container my-5">
+
+        <div class="row g-4">
+            <div class="container my-5">
+                <h2 class="text-center mb-4 fw-bold">Place Order</h2>
+
+                <div class="row">
+
+                  
+                    <div class="col-md-8">
+                        <div class="row g-4">
+                        </div> 
+                    </div> 
+
+                   
+                    <div class="col-md-4">
+                        <div class="card shadow p-3 sticky-top" style="top: 80px;">
+                            <h4 class="fw-bold text-center mb-3">Make an Order</h4>
+
+                            <div class="mb-2">
+                                <label class="form-label">Burger Name</label>
+                                <input type="text" class="form-control" id="orderBurgerName" placeholder="Enter burger">
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Burger Price</label>
+                                <input type="text" class="form-control" id="orderBurgerPrice" placeholder="Enter price">
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="orderQty" value="1" min="1">
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Customer Name</label>
+                                <input type="text" class="form-control" id="customerName" placeholder="Your name">
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="customerPhone" placeholder="07X-XXXXXXX">
+                            </div>
+
+                            <button class="btn btn-dark w-100 mt-2" onclick="placeOrder();">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+    </div>
     <!-- FOOTER -->
     <footer class="bg-dark text-light text-center py-3">
         <p class="mb-0">© 2025 Burger Shop. All Rights Reserved.</p>
     </footer>
 
     <!-- Bootstrap JS -->
-   
     <script src="js/app.js"></script>
 </body>
+
 </html>
