@@ -139,6 +139,10 @@
                     <div class="col-md-4">
                         <div class="card shadow p-3 sticky-top" style="top: 80px;">
                             <h4 class="fw-bold text-center mb-3">Make an Order</h4>
+                            <div class="mb-2">
+                                <label class="form-label">Order Id</label>
+                                <input type="text" class="form-control" id="orderId" placeholder="Enter Order Id" disabled>
+                            </div>
 
                             <div class="mb-2">
                                 <label class="form-label">Burger Name</label>
@@ -178,6 +182,9 @@
     </footer>
 
     <!-- Bootstrap JS -->
+     <script>
+        document.getElementById("orderId").value = generateOrderId();
+     </script>
     <script src="js/app.js"></script>
 </body>
 

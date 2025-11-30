@@ -1,5 +1,4 @@
-// let customerArray = [];
-// localStorage.setItem("customers", JSON.stringify(customerArray));
+
 
 fetch("nav.html")
     .then(res => res.text())
@@ -10,7 +9,7 @@ fetch("nav.html")
 const ar = ["Lakshan", "123"]
 localStorage.setItem("loginDetails", JSON.stringify(ar));
 
-function login() {
+function login() { 
     let userName = document.getElementById("username").value.trim();
     let password = document.getElementById("password").value.trim();
 
@@ -22,13 +21,17 @@ function login() {
     }
 
     if (adminDetails[0] === userName && adminDetails[1] === password) {
-
+     
+        window.location.replace("adminPanel.html");
     } else {
         Swal.fire("Invalid username or password", "warning");
     }
 }
 
+ 
+
 function placeOrder() {
+    let orderId = document.getElementById("orderId").value;
     let itemName = document.getElementById("orderBurgerName").value.trim();
     let qty = document.getElementById("orderQty").value.trim();
     let customerName = document.getElementById("customerName").value.trim();
@@ -65,12 +68,14 @@ function placeOrder() {
             if (tempCusArray[i].phone === customerPhoneNumber) {
 
                 tempCusArray[i].orders.push({
+                    orderId: orderId,
                     name: itemName,
                     itemQty: qty,
                     unitPrice: price
                 });
 
                 localStorage.setItem("customers", JSON.stringify(tempCusArray));
+                document.getElementById("orderId").value = generateOrderId();
                 document.getElementById("orderBurgerName").value = "";
                 document.getElementById("orderQty").value = "1";
                 document.getElementById("customerName").value = "";
@@ -84,6 +89,7 @@ function placeOrder() {
             name: customerName,
             phone: customerPhoneNumber,
             orders: [{
+                orderId:orderId,
                 name: itemName,
                 itemQty: qty,
                 unitPrice: price
@@ -91,7 +97,7 @@ function placeOrder() {
         });
 
         localStorage.setItem("customers", JSON.stringify(tempCusArray));
-
+        document.getElementById("orderId").value = generateOrderId();
         document.getElementById("orderBurgerName").value = "";
         document.getElementById("orderQty").value = "1";
         document.getElementById("customerName").value = "";
@@ -114,3 +120,20 @@ function searchCustomer() {
     }
     document.getElementById("customerName").value = "";
 }
+
+
+function generateOrderId() {
+    let customers = JSON.parse(localStorage.getItem("customers"));
+    let orders = customers[customers.length-1].orders;
+
+    if (!customers || customers.length === 0) {
+        return "OR0001";
+    }
+    let lastOrderId = orders[orders.length-1].orderId;
+    let lastNumber = parseInt(lastOrderId.replace("OR", ""));
+    return "OR" + String(lastNumber+1).padStart(4, "0");
+}
+
+
+ 
+ 
