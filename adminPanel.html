@@ -76,58 +76,12 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Address</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>John Doe</td>
-                                            <td>john@example.com</td>
-                                            <td>+1 234 567 890</td>
-                                            <td>123 Main St, NY</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jane Smith</td>
-                                            <td>jane@example.com</td>
-                                            <td>+1 234 567 891</td>
-                                            <td>456 Oak Ave, CA</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Bob Johnson</td>
-                                            <td>bob@example.com</td>
-                                            <td>+1 234 567 892</td>
-                                            <td>789 Pine Rd, TX</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
+                                    <tbody id="customerTable">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -201,38 +155,6 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Laptop Pro 15</td>
-                                            <td>Electronics</td>
-                                            <td>$1,299.99</td>
-                                            <td>45</td>
-                                            <td>LPT-001</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Wireless Mouse</td>
-                                            <td>Electronics</td>
-                                            <td>$29.99</td>
-                                            <td>120</td>
-                                            <td>MSE-002</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td>3</td>
                                             <td>T-Shirt Blue</td>
                                             <td>Clothing</td>
@@ -259,66 +181,6 @@
                 <div id="orders" class="content-section">
                     <h2 class="mb-4">Manage Orders</h2>
 
-                    <!-- Add Order Form -->
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="fas fa-cart-plus me-2"></i>Create New Order
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Customer</label>
-                                        <select class="form-select">
-                                            <option selected>Select customer</option>
-                                            <option>John Doe</option>
-                                            <option>Jane Smith</option>
-                                            <option>Bob Johnson</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Order Date</label>
-                                        <input type="date" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Product</label>
-                                        <select class="form-select">
-                                            <option selected>Select product</option>
-                                            <option>Laptop Pro 15</option>
-                                            <option>Wireless Mouse</option>
-                                            <option>T-Shirt Blue</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label">Quantity</label>
-                                        <input type="number" class="form-control" placeholder="1" value="1">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label">Status</label>
-                                        <select class="form-select">
-                                            <option>Pending</option>
-                                            <option>Processing</option>
-                                            <option>Shipped</option>
-                                            <option>Delivered</option>
-                                            <option>Cancelled</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Shipping Address</label>
-                                    <textarea class="form-control" rows="2"
-                                        placeholder="Enter shipping address"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Create
-                                    Order</button>
-                                <button type="reset" class="btn btn-secondary"><i
-                                        class="fas fa-undo me-2"></i>Reset</button>
-                            </form>
-                        </div>
-                    </div>
-
                     <!-- Orders List -->
                     <div class="card">
                         <div class="card-header">
@@ -339,58 +201,8 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>#ORD-001</td>
-                                            <td>John Doe</td>
-                                            <td>Laptop Pro 15</td>
-                                            <td>1</td>
-                                            <td>$1,299.99</td>
-                                            <td><span class="badge bg-warning">Processing</span></td>
-                                            <td>2024-01-15</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#ORD-002</td>
-                                            <td>Jane Smith</td>
-                                            <td>Wireless Mouse</td>
-                                            <td>2</td>
-                                            <td>$59.98</td>
-                                            <td><span class="badge bg-success">Delivered</span></td>
-                                            <td>2024-01-14</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#ORD-003</td>
-                                            <td>Bob Johnson</td>
-                                            <td>T-Shirt Blue</td>
-                                            <td>3</td>
-                                            <td>$59.97</td>
-                                            <td><span class="badge bg-info">Shipped</span></td>
-                                            <td>2024-01-13</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
+                                    <tbody id="orderTable">
+                                        
                                     </tbody>
                                 </table>
                             </div>
