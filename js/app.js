@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (input3) loadDashboard();
     let input4 = document.getElementById("productList");
     if (input4) loadProductCards();
-    let input5 = document.getElementById("productList");
+    let input5 = document.getElementById("avaiableProducts");
     if(input5) loadProduct();
     let input6 = document.getElementById('orderId');
     if (input6) input6.value = generateOrderId();
@@ -244,7 +244,7 @@ function loadCustomer() {
                                             <td class="table-actions">
                                                 <button class="btn btn-sm btn-warning btn-action" onclick="loadUpdateCustomerForm('${customers[i].name}', '${customers[i].phone}')"><i
                                                         class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
+                                                <button class="btn btn-sm btn-danger btn-action" onclick="deleteCustomer('${customers[i].phone}');"><i
                                                         class="fas fa-trash"></i> Delete</button>
                                             </td>
                                         </tr>`;
@@ -278,16 +278,16 @@ function loadUpdateCustomerForm(cName,cPhone){
                     </div>`
 }
 function updateCustomer(cPhone){
-    var customers = JSON.parse(localStorage.getItem("customers")) || [];
-    var newCustomerName = document.getElementById("updateCustomerName").value.trim();
-    var newCustomerPhone = document.getElementById("updateCustomerPhone").value.trim();
+    let customers = JSON.parse(localStorage.getItem("customers")) || [];
+    let newCustomerName = document.getElementById("updateCustomerName").value.trim();
+    let newCustomerPhone = document.getElementById("updateCustomerPhone").value.trim();
 
     if (newCustomerName === "" || newCustomerPhone === "") {
         Swal.fire("Missing Fields", "Please fill name and phone", "warning");
         return;
     }
 
-    for (var i = 0; i < customers.length; i++) {
+    for (let i = 0; i < customers.length; i++) {
         if (customers[i].phone === cPhone) {
             if (customers[i].name === newCustomerName && customers[i].phone === newCustomerPhone) {
                 Swal.fire("No changes", "Name and phone are unchanged", "info");
@@ -304,6 +304,28 @@ function updateCustomer(cPhone){
         }
     }
     Swal.fire("Not found", "Customer not found", "error");
+}
+
+function deleteCustomer(cPhone){
+    var customers = JSON.parse(localStorage.getItem("customers")) || [];
+    var index = -1;
+    
+    for(var i = 0; i < customers.length; i++){
+        if(customers[i].phone === cPhone){
+            index = i;
+            break;
+        }
+    }
+    
+    if(index === -1){
+        Swal.fire("Not found", "Customer not found", "error");
+        return;
+    }
+    
+    customers.splice(index, 1);
+    localStorage.setItem("customers", JSON.stringify(customers));
+    Swal.fire("Deleted", "Customer removed successfully", "success");
+    loadCustomer();
 }
 
 function loadOrder() {
