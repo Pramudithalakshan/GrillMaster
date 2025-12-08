@@ -136,64 +136,101 @@ function generateOrderId() {
     return 'OR' + String(next).padStart(4, '0');
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    let input = document.getElementById('orderId');
-    if (input) input.value = generateOrderId();
-});
-
 function addProduct() {
     let productName = document.getElementById("productName").value;
     let productCategory = document.getElementById("productCategory").value;
     let productPrice = document.getElementById("productPrice").value;
     let productDesc = document.getElementById("productDesc").value;
+    let imagePicker = document.getElementById("imagePicker");
 
     if (productName === "" || productCategory === "" || productPrice === "" || productDesc === "") {
         Swal.fire("Missing Fields", "Please fill all the fields", "warning");
         return;
-    } else {
-        let tempProductArray = JSON.parse(localStorage.getItem("products")) || [];
-
-        for (let i = 0; i < tempProductArray.length; i++) {
-            if (tempProductArray[i].productName === productName) {
-                Swal.fire("Update Product", "Product Updated Successfully", "success");
-
-                tempProductArray[i].push({
-                    productPrice: productPrice,
-                    productDesc: productDesc
-                });
-
-                localStorage.setItem("products", JSON.stringify(tempProductArray));
-                document.getElementById("productName").value = "";
-                document.getElementById("productCategory").value = "";
-                document.getElementById("productPrice").value = "";
-                document.getElementById("productDesc").value = "";
-                return;
-            }
-        }
-        Swal.fire("Add Product", "Product Added Successfully", "success");
-
-        tempProductArray.push({
-            productName: productName,
-            productCategory: productCategory,
-            productPrice: productPrice,
-            productDesc: productDesc
-        });
-
-        localStorage.setItem("products", JSON.stringify(tempProductArray));
-        document.getElementById("productName").value = "";
-        document.getElementById("productCategory").value = "";
-        document.getElementById("productPrice").value = "";
-        document.getElementById("productDesc").value = "";
     }
+
+    if (!imagePicker.files || imagePicker.files.length === 0) {
+        Swal.fire("Missing Image", "Please select an image", "warning");
+        return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        var productImg = e.target.result;
+        storeProduct(productName, productCategory, productPrice, productDesc, productImg);
+    };
+    reader.readAsDataURL(imagePicker.files[0]);
+}
+
+function storeProduct(productName, productCategory, productPrice, productDesc, productImg) {
+    var tempProductArray = JSON.parse(localStorage.getItem("products")) || [];
+
+    for (var i = 0; i < tempProductArray.length; i++) {
+        if (tempProductArray[i].productName === productName) {
+            Swal.fire("Update Product", "Product Updated Successfully", "success");
+            tempProductArray[i].productPrice = productPrice;
+            tempProductArray[i].productDesc = productDesc;
+            tempProductArray[i].productImg = productImg;
+            localStorage.setItem("products", JSON.stringify(tempProductArray));
+            clearProductForm();
+            loadProductCards();
+            return;
+        }
+    }
+
+    Swal.fire("Add Product", "Product Added Successfully", "success");
+
+    tempProductArray.push({
+        productName: productName,
+        productCategory: productCategory,
+        productPrice: productPrice,
+        productDesc: productDesc,
+        productImg: productImg
+    });
+
+    localStorage.setItem("products", JSON.stringify(tempProductArray));
+    clearProductForm();
+    loadProductCards();
+}
+
+function clearProductForm() {
+    document.getElementById("productName").value = "";
+    document.getElementById("productCategory").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productDesc").value = "";
+    document.getElementById("imagePicker").value = "";
+}
+function loadProductCards() {
+    var tempProductArray = JSON.parse(localStorage.getItem("products")) || [];
+    var html = '';
+    for (var i = 0; i < tempProductArray.length; i++) {
+        html += `
+            <div class="col-md-4">
+                <div class="card burger-card shadow-sm">
+                    <img src="${tempProductArray[i].productImg}" class="card-img-top" alt="${tempProductArray[i].productName}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">${tempProductArray[i].productName}</h5>
+                        <p class="card-text">${tempProductArray[i].productDesc}</p>
+                        <p class="fw-bolder">Rs. ${tempProductArray[i].productPrice}</p>
+                    </div>
+                </div>
+            </div>`;
+    }
+    document.getElementById("productList").innerHTML = html;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     let input1 = document.getElementById("customerTable");
     if (input1) loadCustomer();
     let input2 = document.getElementById("orderTable");
-    if(input2) loadOrder();
+    if (input2) loadOrder();
     let input3 = document.getElementById("totalCustomers");
-    if(input3) loadDashboard();
+    if (input3) loadDashboard();
+    let input4 = document.getElementById("productList");
+    if (input4) loadProductCards();
+    let input5 = document.getElementById("productList");
+    if(input5) loadProduct();
+    let input6 = document.getElementById('orderId');
+    if (input6) input.value = generateOrderId();
 });
 function loadCustomer() {
     let customers = JSON.parse(localStorage.getItem("customers")) || [];
@@ -220,8 +257,8 @@ function loadOrder() {
     for (let i = 0; i < customers.length; i++) {
         let orders = customers[i].orders || [];
         for (let j = 0; j < orders.length; j++) {
-            
-             document.getElementById("orderTable").innerHTML=`
+
+            document.getElementById("orderTable").innerHTML = `
                                         <tr>
                                             <td>${orders[j].orderId}</td>
                                             <td>${customers[i].name}</td>
@@ -231,8 +268,6 @@ function loadOrder() {
                                             <td><span class="badge bg-info">${orders[j].status}</span></td>
                                             <td>${orders[i].date}</td>
                                             <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
                                                 <button class="btn btn-sm btn-warning btn-action"><i
                                                         class="fas fa-edit"></i> Edit</button>
                                                 <button class="btn btn-sm btn-danger btn-action"><i
@@ -248,7 +283,7 @@ function currentTime() {
     return now.toLocaleString();
 }
 
-function loadDashboard(){
+function loadDashboard() {
     let customerCount = 0;
     let productCount = 0;
     let orderCount = 0;
@@ -258,13 +293,32 @@ function loadDashboard(){
         let orders = customers[i].orders || [];
         customerCount++;
         for (let j = 0; j < orders.length; j++) {
-          orderCount++;
+            orderCount++;
         }
     }
-    for(let i=0; i<products.length; i++){
-      productCount++;
+    for (let i = 0; i < products.length; i++) {
+        productCount++;
     }
     document.getElementById("totalCustomers").innerText = customerCount;
     document.getElementById("totalProducts").innerText = productCount;
     document.getElementById("totalOrders").innerText = orderCount;
+}
+
+function loadProduct() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let count=1;
+    for (let i = 0; i < products.length; i++) {
+        document.getElementById("productList").innerHTML = ` 
+                                      <td>${count}</td>
+                                            <td>${products[i].productName}</td>
+                                            <td>${products[i].productCategory}</td>
+                                            <td>${products[i].productPrice}</td>
+                                            <td class="table-actions">
+                                                <button class="btn btn-sm btn-warning btn-action"><i
+                                                        class="fas fa-edit"></i> Edit</button>
+                                                <button class="btn btn-sm btn-danger btn-action"><i
+                                                        class="fas fa-trash"></i> Delete</button>
+                                         </td>`
+    }
+    count++;
 }

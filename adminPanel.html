@@ -126,6 +126,7 @@
                                     <textarea class="form-control" rows="3"
                                         placeholder="Enter product description" id="productDesc"></textarea>
                                 </div>
+                                <input type="file" id="imagePicker" accept="image/*">
                                 <button type="button" class="btn btn-primary" onclick="addProduct();"><i class="fas fa-save me-2"></i>Add
                                     Product</button>
                                 <button type="reset" class="btn btn-secondary"><i
@@ -148,27 +149,12 @@
                                             <th>Product Name</th>
                                             <th>Category</th>
                                             <th>Price</th>
-                                            <th>Stock</th>
-                                            <th>SKU</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>T-Shirt Blue</td>
-                                            <td>Clothing</td>
-                                            <td>$19.99</td>
-                                            <td>200</td>
-                                            <td>TSH-003</td>
-                                            <td class="table-actions">
-                                                <button class="btn btn-sm btn-info btn-action"><i
-                                                        class="fas fa-eye"></i> View</button>
-                                                <button class="btn btn-sm btn-warning btn-action"><i
-                                                        class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </td>
+                                        <tr id="productList">
+                                           
                                         </tr>
                                     </tbody>
                                 </table>
