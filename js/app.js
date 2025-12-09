@@ -191,6 +191,7 @@ function storeProduct(productName, productCategory, productPrice, productDesc, p
     localStorage.setItem("products", JSON.stringify(tempProductArray));
     clearProductForm();
     loadProductCards();
+    loadProduct();
 }
 
 function loadProductCards() {
@@ -378,8 +379,6 @@ function loadDashboard() {
 }
 
 function loadProduct() {
-    console.log('Product updated');
-    
     let products = JSON.parse(localStorage.getItem("products")) || [];
     let count = 1;
     let html = '';
@@ -392,7 +391,7 @@ function loadProduct() {
                                             <td class="table-actions">
                                                 <button class="btn btn-sm btn-warning btn-action" onclick="loadProductDetailsForm('${products[i].productName}','${i}');"><i
                                                         class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
+                                                <button class="btn btn-sm btn-danger btn-action" onclick="deleteProduct('${products[i].productName}');"><i
                                                         class="fas fa-trash"></i> Delete</button>
                                          </td>`
     }
@@ -472,4 +471,26 @@ function clearProductForm() {
     document.getElementById("productPrice").value = "";
     document.getElementById("productDesc").value = "";
     document.getElementById("imagePicker").value = "";
+}
+
+function deleteProduct(product) {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let index = -1;
+
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].productName === product) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index === -1) {
+        Swal.fire("Not found", "Customer not found", "error");
+        return;
+    }
+
+    products.splice(index, 1);
+    localStorage.setItem("products", JSON.stringify(products));
+    Swal.fire("Deleted", "Product removed successfully", "success");
+    loadProduct();
 }
