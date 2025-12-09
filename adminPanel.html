@@ -68,6 +68,7 @@
                         </div>
                         <div class="card-body">
                             <form>
+                                <div id="productId"></div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Product Name</label>
@@ -97,6 +98,9 @@
                                         id="productDesc"></textarea>
                                 </div>
                                 <input type="file" id="imagePicker" accept="image/*">
+                                <button type="button" class="btn btn-warning" onclick="updateProduct();"><i
+                                        class="fas fa-save me-2"></i>Update
+                                    Product</button>
                                 <button type="button" class="btn btn-primary" onclick="addProduct();"><i
                                         class="fas fa-save me-2"></i>Add
                                     Product</button>

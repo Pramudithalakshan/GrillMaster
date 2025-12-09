@@ -153,18 +153,18 @@ function addProduct() {
         return;
     }
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = function (e) {
-        var productImg = e.target.result;
+        let productImg = e.target.result;
         storeProduct(productName, productCategory, productPrice, productDesc, productImg);
     };
     reader.readAsDataURL(imagePicker.files[0]);
 }
 
 function storeProduct(productName, productCategory, productPrice, productDesc, productImg) {
-    var tempProductArray = JSON.parse(localStorage.getItem("products")) || [];
+    let tempProductArray = JSON.parse(localStorage.getItem("products")) || [];
 
-    for (var i = 0; i < tempProductArray.length; i++) {
+    for (let i = 0; i < tempProductArray.length; i++) {
         if (tempProductArray[i].productName === productName) {
             Swal.fire("Update Product", "Product Updated Successfully", "success");
             tempProductArray[i].productPrice = productPrice;
@@ -173,6 +173,7 @@ function storeProduct(productName, productCategory, productPrice, productDesc, p
             localStorage.setItem("products", JSON.stringify(tempProductArray));
             clearProductForm();
             loadProductCards();
+            loadProduct();
             return;
         }
     }
@@ -192,21 +193,15 @@ function storeProduct(productName, productCategory, productPrice, productDesc, p
     loadProductCards();
 }
 
-function clearProductForm() {
-    document.getElementById("productName").value = "";
-    document.getElementById("productCategory").value = "";
-    document.getElementById("productPrice").value = "";
-    document.getElementById("productDesc").value = "";
-    document.getElementById("imagePicker").value = "";
-}
 function loadProductCards() {
-    var tempProductArray = JSON.parse(localStorage.getItem("products")) || [];
-    var html = '';
-    for (var i = 0; i < tempProductArray.length; i++) {
+    let tempProductArray = JSON.parse(localStorage.getItem("products")) || [];
+    let html = '';
+    let count = 1;
+    for (let i = 0; i < tempProductArray.length; i++) {
         html += `
             <div class="col-md-4">
                 <div class="card burger-card shadow-sm">
-                    <img src="${tempProductArray[i].productImg}" class="card-img-top" alt="${tempProductArray[i].productName}" style="height: 200px; object-fit: cover;">
+                    <img id="img${count}" src="${tempProductArray[i].productImg}" class="card-img-top" alt="${tempProductArray[i].productName}" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">${tempProductArray[i].productName}</h5>
                         <p class="card-text">${tempProductArray[i].productDesc}</p>
@@ -228,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let input4 = document.getElementById("productList");
     if (input4) loadProductCards();
     let input5 = document.getElementById("avaiableProducts");
-    if(input5) loadProduct();
+    if (input5) loadProduct();
     let input6 = document.getElementById('orderId');
     if (input6) input6.value = generateOrderId();
 });
@@ -251,8 +246,8 @@ function loadCustomer() {
     }
     document.getElementById("customerTable").innerHTML = html;
 }
-function loadUpdateCustomerForm(cName,cPhone){
-  document.getElementById("customerUpdateForm").innerHTML = ` 
+function loadUpdateCustomerForm(cName, cPhone) {
+    document.getElementById("customerUpdateForm").innerHTML = ` 
                  <div class="card">
                         <div class="card-header">
                             <i class="fas fa-user-plus me-2"></i>Update Customer
@@ -277,7 +272,7 @@ function loadUpdateCustomerForm(cName,cPhone){
                         </div>
                     </div>`
 }
-function updateCustomer(cPhone){
+function updateCustomer(cPhone) {
     let customers = JSON.parse(localStorage.getItem("customers")) || [];
     let newCustomerName = document.getElementById("updateCustomerName").value.trim();
     let newCustomerPhone = document.getElementById("updateCustomerPhone").value.trim();
@@ -306,22 +301,22 @@ function updateCustomer(cPhone){
     Swal.fire("Not found", "Customer not found", "error");
 }
 
-function deleteCustomer(cPhone){
-    var customers = JSON.parse(localStorage.getItem("customers")) || [];
-    var index = -1;
-    
-    for(var i = 0; i < customers.length; i++){
-        if(customers[i].phone === cPhone){
+function deleteCustomer(cPhone) {
+    let customers = JSON.parse(localStorage.getItem("customers")) || [];
+    let index = -1;
+
+    for (let i = 0; i < customers.length; i++) {
+        if (customers[i].phone === cPhone) {
             index = i;
             break;
         }
     }
-    
-    if(index === -1){
+
+    if (index === -1) {
         Swal.fire("Not found", "Customer not found", "error");
         return;
     }
-    
+
     customers.splice(index, 1);
     localStorage.setItem("customers", JSON.stringify(customers));
     Swal.fire("Deleted", "Customer removed successfully", "success");
@@ -335,7 +330,7 @@ function loadOrder() {
         let html = '';
         for (let j = 0; j < orders.length; j++) {
 
-           html += `
+            html += `
                                         <tr>
                                             <td>${orders[j].orderId}</td>
                                             <td>${customers[i].name}</td>
@@ -352,7 +347,7 @@ function loadOrder() {
                                             </td>
                                         </tr>`
         }
-         document.getElementById("orderTable").innerHTML = html;
+        document.getElementById("orderTable").innerHTML = html;
     }
 }
 
@@ -383,23 +378,98 @@ function loadDashboard() {
 }
 
 function loadProduct() {
+    console.log('Product updated');
+    
     let products = JSON.parse(localStorage.getItem("products")) || [];
-    let count=1;
-    let html='';
+    let count = 1;
+    let html = '';
     for (let i = 0; i < products.length; i++) {
-       html += ` 
+        html += `                     
                                       <td>${count}</td>
                                             <td>${products[i].productName}</td>
                                             <td>${products[i].productCategory}</td>
                                             <td>${products[i].productPrice}</td>
                                             <td class="table-actions">
-                                                <button class="btn btn-sm btn-warning btn-action"><i
+                                                <button class="btn btn-sm btn-warning btn-action" onclick="loadProductDetailsForm('${products[i].productName}','${i}');"><i
                                                         class="fas fa-edit"></i> Edit</button>
                                                 <button class="btn btn-sm btn-danger btn-action"><i
                                                         class="fas fa-trash"></i> Delete</button>
                                          </td>`
     }
-     document.getElementById("productList").innerHTML = html;
+    document.getElementById("avaiableProducts").innerHTML = html;
     count++;
 }
+function loadProductDetailsForm(pName, productId) {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].productName === pName) {
+            document.getElementById("productName").value = products[i].productName;
+            document.getElementById("productCategory").value = products[i].productCategory;
+            document.getElementById("productPrice").value = products[i].productPrice;
+            document.getElementById("productDesc").value = products[i].productDesc;
+            document.getElementById("productId").value = productId;
+        }
+    }
+}
+function updateProduct() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let productId = Number(document.getElementById("productId").value);
 
+    let productNewName = document.getElementById("productName").value;
+    let productNewCategory = document.getElementById("productCategory").value;
+    let productNewPrice = document.getElementById("productPrice").value;
+    let productNewDesc = document.getElementById("productDesc").value;
+    let imageInput = document.getElementById("imagePicker");
+
+    if (productNewName === "" || productNewCategory === "" || productNewPrice === "" || productNewDesc === "") {
+        Swal.fire("Missing Fields", "Please fill all fields", "warning");
+        return;
+    }
+
+    let reader = new FileReader();
+
+    reader.onload = function (e) {
+        let newImg = e.target.result;
+        if (products[productId]) {
+
+            if (
+                products[productId].productName === productNewName &&
+                products[productId].productCategory === productNewCategory &&
+                products[productId].productPrice === productNewPrice &&
+                products[productId].productDesc === productNewDesc &&
+                products[productId].productImg === newImg
+            ) {
+                Swal.fire("No changes", "Product details are unchanged", "info");
+                return;
+            }
+            products[productId].productName = productNewName;
+            products[productId].productCategory = productNewCategory;
+            products[productId].productPrice = productNewPrice;
+            products[productId].productDesc = productNewDesc;
+            products[productId].productImg = newImg;
+
+            localStorage.setItem("products", JSON.stringify(products));
+            Swal.fire("Updated", "Product updated successfully ok", "success");
+
+            clearProductForm();
+            loadProduct();
+        } else {
+            Swal.fire("Not found", "Product not found", "error");
+        }
+    };
+
+    if (imageInput.files.length > 0) {
+        reader.readAsDataURL(imageInput.files[0]);
+    } else {
+        reader.onload({ target: { result: products[productId].productImg } });
+    }
+}
+
+
+function clearProductForm() {
+    document.getElementById("productName").value = "";
+    document.getElementById("productCategory").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productDesc").value = "";
+    document.getElementById("imagePicker").value = "";
+}
