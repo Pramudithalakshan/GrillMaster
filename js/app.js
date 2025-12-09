@@ -341,10 +341,8 @@ function loadOrder() {
                                             <td><span class="badge bg-info">${orders[j].status}</span></td>
                                             <td>${orders[i].date}</td>
                                             <td class="table-actions">
-                                                <button class="btn btn-sm btn-warning btn-action"><i
+                                                <button class="btn btn-sm btn-warning btn-action" onclick="editOrderStatus('${orders[j].orderId}');"><i
                                                         class="fas fa-edit"></i> Edit</button>
-                                                <button class="btn btn-sm btn-danger btn-action"><i
-                                                        class="fas fa-trash"></i> Delete</button>
                                             </td>
                                         </tr>`
         }
@@ -493,4 +491,42 @@ function deleteProduct(product) {
     localStorage.setItem("products", JSON.stringify(products));
     Swal.fire("Deleted", "Product removed successfully", "success");
     loadProduct();
+}
+function editOrderStatus(orId) {
+    Swal.fire({
+        title: 'Select an order status',
+        input: 'select',
+        inputOptions: {
+            Delivered: 'Delivered',
+            Cancelled: 'Cancelled',
+        },
+        inputPlaceholder: 'Choose one',
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to select something!';
+            }
+        }
+    }).then((result) => {
+        console.log(result);
+        if (result.isConfirmed) {
+            let customers = JSON.parse(localStorage.getItem("customers")) || [];
+            for (let i = 0; i < customers.length; i++) {
+                let orders = customers[i].orders || [];
+                for (let j = 0; j < orders.length; j++) {
+                    if (orders[j].orderId === orId) {
+                        orders[j].status = result.value;
+                    }
+                }
+            }
+            localStorage.setItem("customers", JSON.stringify(customers));
+            Swal.fire("Order Update", "Order status updated successfully", "success");
+            loadOrder();
+        } else if (result.isDismissed) {
+            Swal.fire('Selection cancelled');
+        }
+    });
+
 }
