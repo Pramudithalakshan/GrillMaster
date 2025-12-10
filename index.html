@@ -42,84 +42,9 @@
         <h2 class="text-center mb-4 fw-bold">Our Burgers</h2>
 
         <div class="row g-4">
-        <div id="productList">
+            <div id="productList">
 
-        </div>
-            <!-- Card 1 -->
-            <!-- <div class="col-md-4">
-                <div class="card burger-card shadow-sm">
-                    <img src="assets/burger2.jpg" class="card-img-top" alt="Classic Burger">
-                    <div class="card-body">
-                        <h5 class="card-title">Classic Burger</h5>
-                        <p class="card-text">Juicy beef patty with fresh lettuce, tomato, cheese, and our signature
-                            sauce.</p>
-                        <p class="fw-bolder">Rs. 900</p>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Card 2 -->
-            <!-- <div class="col-md-4">
-                <div class="card burger-card shadow-sm">
-                    <img src="assets/burger3.jpg" class="card-img-top" alt="Cheese Explosion">
-                    <div class="card-body">
-                        <h5 class="card-title">Cheese Explosion</h5>
-                        <p class="card-text">Double cheese, double flavor! A dream burger for cheese lovers.</p>
-                        <p class="fw-bolder">Rs. 1000</p>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Card 3 -->
-            <!-- <div class="col-md-4">
-                <div class="card burger-card shadow-sm">
-                    <img src="assets/burger4.jpg" class="card-img-top" alt="Spicy Hot Burger">
-                    <div class="card-body">
-                        <h5 class="card-title">Spicy Hot Burger</h5>
-                        <p class="card-text">Packed with jalapeños, spicy sauce, and crispy onions for heat lovers.</p>
-                        <p class="fw-bolder">Rs. 1300</p>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Card 4 -->
-            <!-- <div class="col-md-4">
-                <div class="card burger-card shadow-sm">
-                    <img src="assets/burger5.jpg" class="card-img-top" alt="Spicy Hot Burger">
-                    <div class="card-body">
-                        <h5 class="card-title">Fish Hot Burger</h5>
-                        <p class="card-text">Juicy fish patty with fresh lettuce, tomato, cheese, and our signature
-                            sauce.</p>
-                        <p class="fw-bolder">Rs. 1200</p>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Card 5 -->
-            <!-- <div class="col-md-4">
-                <div class="card burger-card shadow-sm">
-                    <img src="assets/burger&fries.jpg" class="card-img-top" alt="Spicy Hot Burger">
-                    <div class="card-body">
-                        <h5 class="card-title">Burger and fries</h5>
-                        <p class="card-text">Fried fries and one chicken burger with cheese slide and Juicy patty slide
-                        </p>
-                        <p class="fw-bolder">Rs. 850</p>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Card 6 -->
-            <!-- <div class="col-md-4">
-                <div class="card burger-card shadow-sm">
-                    <img src="assets/burger&coce.jpg" class="card-img-top" alt="Spicy Hot Burger">
-                    <div class="card-body">
-                        <h5 class="card-title">Burger and coce</h5>
-                        <p class="card-text">Juicy cheese burger and one coce</p>
-                        <p class="fw-bolder">Rs. 900</p>
-                    </div>
-                </div>
-            </div> -->
-
+            </div>
         </div>
     </div>
 
@@ -148,13 +73,15 @@
                             </div>
 
                             <div class="mb-2">
-                                <label class="form-label">Burger Name</label>
-                                <input type="text" class="form-control" id="orderBurgerName" placeholder="Enter burger">
+                                <label class="form-label">Product Name</label>
+                                <select class="form-select" id="orderProductName" onchange="setProductPrice();">
+
+                                </select>
                             </div>
 
                             <div class="mb-2">
-                                <label class="form-label">Burger Price</label>
-                                <input type="text" class="form-control" id="orderBurgerPrice" placeholder="Enter price">
+                                <label class="form-label">Product Price</label>
+                                <input type="text" class="form-control" id="orderBurgerPrice" placeholder="Price" disabled>
                             </div>
 
                             <div class="mb-2">
@@ -190,7 +117,7 @@
             .then(nav => {
                 document.getElementById("navBar").innerHTML = nav;
             })
-        
+
     </script>
     <script src="js/app.js"></script>
 </body>

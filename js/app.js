@@ -24,7 +24,7 @@ function login() {
 
 function placeOrder() {
     let orderId = document.getElementById("orderId").value;
-    let itemName = document.getElementById("orderBurgerName").value.trim();
+    let itemName = document.getElementById("orderProductName").value.trim();
     let qty = document.getElementById("orderQty").value.trim();
     let customerName = document.getElementById("customerName").value.trim();
     let customerPhoneNumber = document.getElementById("customerPhone").value.trim();
@@ -72,7 +72,7 @@ function placeOrder() {
 
                 localStorage.setItem("customers", JSON.stringify(tempCusArray));
                 document.getElementById("orderId").value = generateOrderId();
-                document.getElementById("orderBurgerName").value = "";
+                document.getElementById("orderProductName").value = "";
                 document.getElementById("orderQty").value = "1";
                 document.getElementById("customerName").value = "";
                 document.getElementById("customerPhone").value = "";
@@ -96,7 +96,7 @@ function placeOrder() {
 
         localStorage.setItem("customers", JSON.stringify(tempCusArray));
         document.getElementById("orderId").value = generateOrderId();
-        document.getElementById("orderBurgerName").value = "";
+        document.getElementById("orderProductName").value = "";
         document.getElementById("orderQty").value = "1";
         document.getElementById("customerName").value = "";
         document.getElementById("customerPhone").value = "";
@@ -113,6 +113,7 @@ function searchCustomer() {
     for (let i = 0; i < tempArray.length; i++) {
         if (tempArray[i].phone === customerPhone) {
             document.getElementById("customerName").value = tempArray[i].name;
+            document.getElementById("customerName").disabled = true;
             return;
         }
     }
@@ -227,6 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (input5) loadProduct();
     let input6 = document.getElementById('orderId');
     if (input6) input6.value = generateOrderId();
+    let input7 = document.getElementById("orderProductName");
+    if(input7) loadProductNames();
 });
 function loadCustomer() {
     let customers = JSON.parse(localStorage.getItem("customers")) || [];
@@ -529,4 +532,35 @@ function editOrderStatus(orId) {
         }
     });
 
+}
+
+function loadProductNames(){
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let html = '<option selected>Select product</option>';
+    
+    for (let i = 0; i < products.length; i++) {
+        html += `<option value="${products[i].productName}">${products[i].productName}</option>`;
+    }
+    
+    document.getElementById("orderProductName").innerHTML = html;
+}
+
+function setProductPrice(){
+    let selectedProductName = document.getElementById("orderProductName").value;
+    
+    if (selectedProductName === "Select product") {
+        document.getElementById("orderBurgerPrice").value = "";
+        return;
+    }
+    
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].productName === selectedProductName) {
+            document.getElementById("orderBurgerPrice").value = products[i].productPrice;
+            return;
+        }
+    }
+    
+    document.getElementById("orderBurgerPrice").value = "";
 }
